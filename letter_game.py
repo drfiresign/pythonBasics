@@ -2,15 +2,15 @@ import os
 import random
 import sys
 
-words = []
+words = ""
 
 # use open() and read() to store list of words in another file
 # I can't get this to read each line without including the \n character at the end of each word...
 def load_words():
     global words
     with open('letter_game_storage.txt', 'r') as f:
-        for line in iter(f):
-            words.append(line)
+        words = f.read()
+        words = words.split(' ')
         f.close()
 
 # change the number of guesses based on the length of the word
@@ -93,12 +93,13 @@ def play(done):
             if play_again != 'n':
                 return play(done=False)
             else:
+                clear()
                 sys.exit()
 
 def welcome():
     start = input("Press enter/return to start or Q to quit ").lower()
     if start == 'q':
-        print("Bye!")
+        clear()
         sys.exit()
     else:
         return True
@@ -107,7 +108,7 @@ print("Welcome to Letter Guess!")
 
 done = False
 
-# load_words()
+load_words()
 
 while True:
     clear()
