@@ -2,20 +2,19 @@ import os
 import random
 import sys
 
-# make a list of words
-words = [
-    'apple',
-    'banana',
-    'orange',
-    'coconut',
-    'strawberry',
-    'lime',
-    'grapefruit',
-    'lemon',
-    'kumquat',
-    'blueberry',
-    'melon'
-]
+words = []
+
+# use open() and read() to store list of words in another file
+# I can't get this to read each line without including the \n character at the end of each word...
+def load_words():
+    global words
+    with open('letter_game_storage.txt', 'r') as f:
+        for line in iter(f):
+            words.append(line)
+        f.close()
+
+# change the number of guesses based on the length of the word
+
 
 def clear():
     if os.name == 'nt':
@@ -107,6 +106,8 @@ def welcome():
 print("Welcome to Letter Guess!")
 
 done = False
+
+# load_words()
 
 while True:
     clear()
