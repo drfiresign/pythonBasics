@@ -46,7 +46,7 @@ def get_guess(bad_guesses, good_guesses):
     while True:
         guess = input ("Guess a letter: ").lower()
 
-        if len(guess) != 1:
+        if len(guess) > 1:
             print("You can only guess a single letter!")
             continue
         elif guess in bad_guesses or guess in good_guesses:
@@ -77,9 +77,10 @@ def play(done):
                 if letter not in good_guesses:
                     found = False
             if found:
+                draw(bad_guesses, good_guesses, secret_word)
                 print("You win!")
                 print("The secret word was {}".format(secret_word))
-
+                done = True
         else:
             bad_guesses.append(guess)
             if len(bad_guesses) == 7:
